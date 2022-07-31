@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/misc/colors.dart';
+import 'package:flutter_cubit/widgets/app_text.dart';
 
 class ResponsiveButton extends StatelessWidget {
   bool? isResponsive;
@@ -7,20 +8,33 @@ class ResponsiveButton extends StatelessWidget {
 
   ResponsiveButton({
     this.isResponsive = false,
-    this.width,
+    this.width = 120,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: 60,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: AppColors.mainColor,
-      ),
-      child: Row(
-        children: [Image.asset("img/button-one.png")],
+    return Flexible(
+      child: Container(
+        width: isResponsive == true ? double.maxFinite : width,
+        height: 60,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(9),
+          color: AppColors.mainColor,
+        ),
+        child: Row(
+          mainAxisAlignment: isResponsive == true
+              ? MainAxisAlignment.spaceBetween
+              : MainAxisAlignment.center,
+          children: [
+            isResponsive == true
+                ? Container(
+                    margin: const EdgeInsets.only(left: 30),
+                    child: AppText(text: "Book Trip Now", color: Colors.white),
+                  )
+                : Container(),
+            Image.asset("img/button-one.png"),
+          ],
+        ),
       ),
     );
   }

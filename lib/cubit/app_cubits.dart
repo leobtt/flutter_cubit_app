@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_cubit/cubit/app_cubit_states.dart';
+import 'package:flutter_cubit/models/data_model.dart';
 import 'package:flutter_cubit/services/data_services.dart';
 
 class AppCubits extends Cubit<CubitStates> {
@@ -8,6 +9,7 @@ class AppCubits extends Cubit<CubitStates> {
   }
   final DataServices data;
   late final places;
+
   void getData() async {
     try {
       emit(LoadingState());
@@ -16,5 +18,13 @@ class AppCubits extends Cubit<CubitStates> {
     } catch (err) {
       print(err);
     }
+  }
+
+  detailPage(DataModel data) async {
+    emit(DetailState(data));
+  }
+
+  goHome() {
+    emit(LoadedState(places));
   }
 }

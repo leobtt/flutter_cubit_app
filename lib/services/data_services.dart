@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 class DataServices {
   String baseUrl = "http://mark.bslmeiyu.com/api";
+
   Future<List<DataModel>> getInfo() async {
     var apiUrl = '/getplaces';
     http.Response res = await http.get(Uri.parse(baseUrl + apiUrl));
